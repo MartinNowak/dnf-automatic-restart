@@ -3,7 +3,7 @@
 set -ueEo pipefail
 
 if ! dnf needs-restarting --reboothint; then
-  reboot
+  shutdown --reboot now 'Rebooting after dnf-automatic updates'
 fi
 
 dnf needs-restarting --services | xargs --no-run-if-empty --max-args=1 systemctl restart
