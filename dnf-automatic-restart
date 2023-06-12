@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -ueEo pipefail
+
+if dnf needs-restarting --reboothint; then
+  reboot
+fi
+
+dnf needs-restarting --services | xargs --no-run-if-empty --max-args=1 systemctl restart
