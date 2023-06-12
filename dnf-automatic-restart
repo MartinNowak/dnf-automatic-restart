@@ -2,7 +2,7 @@
 
 set -ueEo pipefail
 
-if dnf needs-restarting --reboothint; then
+if ! dnf needs-restarting --reboothint; then
   reboot
 fi
 
