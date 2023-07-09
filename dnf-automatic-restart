@@ -7,5 +7,7 @@ if ! dnf needs-restarting --reboothint; then
 fi
 
 mapfile -t services < <(dnf needs-restarting --services)
-echo "Restarting ${services[*]}"
-printf '%s\n' "${services[@]}" | xargs --no-run-if-empty --max-args=1 systemctl restart
+if [[ "${#services[*]}" -ne 0 ]; then
+  echo "Restarting ${services[*]}"
+  printf '%s\n' "${services[@]}" | xargs --no-run-if-empty --max-args=1 systemctl restart
+fi
